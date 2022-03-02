@@ -30,7 +30,7 @@ class _DataListPage extends State<DataListPage>{
             child:ListView.builder(
               itemCount:datas.length,
               itemBuilder:(BuildContext context,int index){
-                return dataRow(index);
+                return dataRow2(index);
               }
             ),
           ),
@@ -48,10 +48,29 @@ class _DataListPage extends State<DataListPage>{
   }
 
   /// データ行Widget
+  Widget dataRow2(int index){
+    int _recId = datas[index].recId;
+    String _content = datas[index].content;
+    return TextButton(
+      child:Text('No.$index , recId:$_recId , content:$_content',style:const TextStyle(color:Colors.black45)),
+      style:TextButton.styleFrom(
+        backgroundColor:const Color.fromARGB(255, 238, 174, 169),
+        alignment: Alignment.topLeft,
+        minimumSize: const Size(10,70),
+        side:const BorderSide(color:Colors.white),
+      ),
+      onPressed: (){
+        Navigator.push(context,MaterialPageRoute(
+          builder:(context) =>  InputDataPage(recId: _recId)
+        ));
+      },
+    );
+  }
+  /// データ行Widget
   Widget dataRow(int index){
     int _recId = datas[index].recId;
     String _content = datas[index].content;
-    return Row(
+    return Container(alignment:Alignment.center,height:70,color:const Color.fromARGB(255, 238, 174, 169),child:Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children:[
         Expanded(
@@ -70,7 +89,7 @@ class _DataListPage extends State<DataListPage>{
           },
         ),
       ]
-    );
+    ));
   }
 
   /// データ取得

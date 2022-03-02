@@ -12,6 +12,7 @@ class InputDataPage extends StatefulWidget{
 }
 class _InputDataPage extends State<InputDataPage>{
   final TextEditingController _inputDataController = TextEditingController();
+  final TextEditingController _inputDataController2 = TextEditingController();
   String gameResStr = "";
   List<String> gameResStrList = [];
 
@@ -41,69 +42,111 @@ class _InputDataPage extends State<InputDataPage>{
       children:[
         Text(gameResStr),
         caluculateBox(),
-        TextButton(child:const Text('次のゲームへ',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(backgroundColor: Colors.pink),onPressed: (){
-          bool inputCheck1 = gameResStr.indexOf('-') == gameResStr.lastIndexOf('-');
-          bool inputCheck2 = gameResStr.contains('-');
-          if(inputCheck1 && inputCheck2){ // 入力チェック問題なし
-            setState((){
-              gameResStrList.add(gameResStr);
-              gameResStr = '';
-            });
-          }else{  // 入力チェックエラー
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content:Text('エラー!!!')
-            ));
-          }
-        }),
       ],
     );
-  }
+  }  
   /// 電卓エリア
   Widget caluculateBox(){
     return Container(
       alignment:Alignment.center,
-      color:Colors.black54,
+      color:Colors.white,
       child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children:[
-              Expanded(child:TextButton(child:const Text('7',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='7';}); })),
-              Expanded(child:TextButton(child:const Text('8',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='8';}); })),
-              Expanded(child:TextButton(child:const Text('9',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='9';}); })),
-            ]
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children:[
-              Expanded(child:TextButton(child:const Text('4',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='4';}); })),
-              Expanded(child:TextButton(child:const Text('5',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='5';}); })),
-              Expanded(child:TextButton(child:const Text('6',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='6';}); })),
-            ]
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children:[
-              Expanded(child:TextButton(child:const Text('1',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='1';}); })),
-              Expanded(child:TextButton(child:const Text('2',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='2';}); })),
-              Expanded(child:TextButton(child:const Text('3',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='3';}); })),
-            ]
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children:[
-              Expanded(child:TextButton(child:const Text('-',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='-';}); })),
-              Expanded(child:TextButton(child:const Text('0',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr+='0';}); })),
-              Expanded(child:TextButton(child:const Text('C',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr='';}); })),
-              Expanded(child:TextButton(child:const Text('B',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize:const Size(10,60),backgroundColor: Colors.pink),onPressed: (){ setState((){gameResStr=Utilities.backSpace(gameResStr);}); })),
+              Expanded(child:
+                Column(
+                  children:[
+                    TextButton(child:const Text('7',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='7';});
+                    }),
+                    TextButton(child:const Text('4',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='4';});
+                    }),
+                    TextButton(child:const Text('1',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='1';});
+                    }),
+                    TextButton(child:const Text('C',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr='';});
+                    }),
+                  ]
+                )
+              ),
+              Expanded(child:
+                Column(
+                  children:[
+                    TextButton(child:const Text('8',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='8';});
+                    }),
+                    TextButton(child:const Text('5',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='5';});
+                    }),
+                    TextButton(child:const Text('2',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='2';});
+                    }),
+                    TextButton(child:const Text('0',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='0';});
+                    }),
+                  ]
+                )
+              ),
+              Expanded(child:
+                Column(
+                  children:[
+                    TextButton(child:const Text('9',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='9';});
+                    }),
+                    TextButton(child:const Text('6',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='6';});
+                    }),
+                    TextButton(child:const Text('3',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='3';});
+                    }),
+                    TextButton(child:const Text('B',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr=Utilities.backSpace(gameResStr);});
+                    }),
+                  ]
+                )
+              ),
+              Expanded(child:
+                Column(
+                  children:[
+                    TextButton(child:const Text('-',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                      setState((){gameResStr+='-';});
+                    }),
+                    TextButton(child:const Text('Next\ngame\n↵',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,180),backgroundColor:Colors.red),onPressed:(){
+                      bool inputCheck1 = gameResStr.isNotEmpty;
+                      if(!inputCheck1){
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('エラー!!!')));
+                        return;
+                      }
+                      bool inputCheck2 = gameResStr.split('-').length == 2;
+                      if(!inputCheck2){
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('エラー!!!')));
+                        return;
+                      }
+                      bool inputCheck3 = int.parse(gameResStr.split('-')[0])>=11 || int.parse(gameResStr.split('-')[1])>=11;
+                      if(!inputCheck3){
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('エラー!!!')));
+                        return;
+                      }
+                      // 入力チェック問題なし
+                      setState((){
+                        gameResStrList.add(gameResStr);
+                        gameResStr = '';
+                      });
+                    }),
+                  ]
+                )
+              ),
             ]
           ),
         ],
       )
     );
   }
-
   /// 編集Widget
   Widget editWidget(){
     return Column(
@@ -175,19 +218,19 @@ class _InputDataPage extends State<InputDataPage>{
         )
       ),
       const Text(')',style:TextStyle(fontSize: 70,fontWeight: FontWeight.w100)),
-      Flexible(child:TextField(decoration:const InputDecoration(hintText:'名前'),controller: _inputDataController)),
+      Flexible(child:TextField(decoration:const InputDecoration(hintText:'名前'),controller: _inputDataController2)),
     ]);
   }
 
   /// データ登録
   void insertData() async{
-    Note note = Note(recId: 0,content: _inputDataController.text+gameResStrList.toString());
+    Note note = Note(recId: 0,content: _inputDataController.text+gameResStrList.toString()+_inputDataController2.text);
     Note.insertData(note);
   }
 
   /// データ更新
   void updateData() async{
-    Note note = Note(recId: 0,content: _inputDataController.text+gameResStrList.toString());
+    Note note = Note(recId: 0,content: _inputDataController.text+gameResStrList.toString()+_inputDataController2.text);
     Note.update(widget.recId,note);
   }
 }
