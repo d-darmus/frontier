@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontier/test/note/db/note.dart';
 import 'package:frontier/basis/utilities/utilities.dart';
@@ -17,6 +19,12 @@ class _InputDataPage extends State<InputDataPage>{
   List<String> gameResStrList = [];
 
   @override
+  void initState(){
+    getData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar:AppBar(
@@ -26,9 +34,10 @@ class _InputDataPage extends State<InputDataPage>{
         scrollDirection:Axis.vertical,
         child: Column(
           children: [
-            0 == widget.recId ? newWidget() : editWidget(), // 新規登録or編集
+            0 == widget.recId ? newTitleWidget() : editTitleWidget(), // 新規登録or編集
             pointSheet(), // 表示
             inputArea(),  // 入力エリア
+            0 == widget.recId ? newWidget() : editWidget(), // 新規登録or編集
           ]
         ),
       ),
@@ -116,7 +125,14 @@ class _InputDataPage extends State<InputDataPage>{
                     TextButton(child:const Text('-',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
                       setState((){gameResStr+='-';});
                     }),
-                    TextButton(child:const Text('Next\ngame\n↵',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,180),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('Back\ngame\n↵',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,90),backgroundColor:Colors.red),onPressed:(){
+                      // 入力チェック問題なし
+                      setState((){
+                        gameResStr = gameResStrList[gameResStrList.length-1];
+                        gameResStrList.removeLast();
+                      });
+                    }),
+                    TextButton(child:const Text('Next\ngame\n↵',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,90),backgroundColor:Colors.red),onPressed:(){
                       bool inputCheck1 = gameResStr.isNotEmpty;
                       if(!inputCheck1){
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('エラー!!!')));
@@ -127,8 +143,13 @@ class _InputDataPage extends State<InputDataPage>{
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('エラー!!!')));
                         return;
                       }
-                      bool inputCheck3 = int.parse(gameResStr.split('-')[0])>=11 || int.parse(gameResStr.split('-')[1])>=11;
+                      bool inputCheck3 = "" != gameResStr.split('-')[0] && "" != gameResStr.split('-')[1];
                       if(!inputCheck3){
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('エラー!!!')));
+                        return;
+                      }
+                      bool inputCheck4 = int.parse(gameResStr.split('-')[0])>=11 || int.parse(gameResStr.split('-')[1])>=11;
+                      if(!inputCheck4){
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('エラー!!!')));
                         return;
                       }
@@ -152,7 +173,7 @@ class _InputDataPage extends State<InputDataPage>{
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children:[
-        Container(alignment:Alignment.center,margin:const EdgeInsets.only(top:10,bottom:10), child:Text('【編集】No.'+widget.recId.toString(),style:const TextStyle(fontSize:20)),),
+        Container(alignment:Alignment.topLeft,height:10,width:10,margin:const EdgeInsets.only(right:5)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children:[
@@ -188,7 +209,7 @@ class _InputDataPage extends State<InputDataPage>{
   Widget newWidget(){
     return Column(
       children:[
-        Container(alignment:Alignment.center,margin:const EdgeInsets.only(top:10,bottom:10), child:const Text('【新規登録】',style:TextStyle(fontSize:20)),),
+        Container(alignment:Alignment.topLeft,height:10,width:10,margin:const EdgeInsets.only(right:5)),
         TextButton(
           child:const Text('保存',style:TextStyle(color:Colors.white)),
           style:TextButton.styleFrom(
@@ -200,6 +221,24 @@ class _InputDataPage extends State<InputDataPage>{
             Navigator.pop(context);
           },
         ),
+      ]
+    );
+  }
+  /// 編集Widget
+  Widget editTitleWidget(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children:[
+        Container(alignment:Alignment.center,margin:const EdgeInsets.only(top:10,bottom:10), child:const Text('【編集】',style:TextStyle(fontSize:20)),),
+      ]
+    );
+  }
+
+  /// 新規登録Widget
+  Widget newTitleWidget(){
+    return Column(
+      children:[
+        Container(alignment:Alignment.center,margin:const EdgeInsets.only(top:10,bottom:10), child:const Text('【新規登録】',style:TextStyle(fontSize:20)),),
       ]
     );
   }
@@ -224,13 +263,29 @@ class _InputDataPage extends State<InputDataPage>{
 
   /// データ登録
   void insertData() async{
-    Note note = Note(recId: 0,content: _inputDataController.text+gameResStrList.toString()+_inputDataController2.text);
+    Note note = Note(recId: 0,content: jsonEncode({"name1":_inputDataController.text,"result":jsonEncode(gameResStrList),"name2":_inputDataController2.text}));
     Note.insertData(note);
   }
 
   /// データ更新
   void updateData() async{
-    Note note = Note(recId: 0,content: _inputDataController.text+gameResStrList.toString()+_inputDataController2.text);
+    Note note = Note(recId: 0,content: jsonEncode({"name1":_inputDataController.text,"result":jsonEncode(gameResStrList),"name2":_inputDataController2.text}));
     Note.update(widget.recId,note);
+  }
+
+  /// データ取得
+  void getData() async{
+    List<Note> note = await Note.getData(widget.recId);
+    if(note.isNotEmpty){
+      setState((){
+        dynamic tmp = jsonDecode(note[0].content);
+        _inputDataController.text = tmp['name1'];
+        _inputDataController2.text = tmp['name2'];
+        gameResStrList.clear();
+        for(dynamic data in jsonDecode(tmp['result'])){
+          gameResStrList.add(data.toString());
+        }
+      });
+    } 
   }
 }

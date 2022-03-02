@@ -43,6 +43,18 @@ class Note{
     });
   }
 
+  /// 特定のデータ取得
+  static Future<List<Note>> getData(int recId) async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(databaseName,where: "recId=?",whereArgs:[recId]);
+    return List.generate(maps.length,(i){
+      return Note(
+        recId: maps[i]['recId'],
+        content: maps[i]['content'],
+      );
+    });
+  }
+
   /// データ挿入
   /// @param Note データモデル
   static Future<void> insertData(Note data) async {
