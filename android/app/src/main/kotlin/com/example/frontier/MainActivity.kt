@@ -1,4 +1,4 @@
-package com.example.frontier
+package com.darmus.frontier
 
 import io.flutter.embedding.android.FlutterActivity
 
