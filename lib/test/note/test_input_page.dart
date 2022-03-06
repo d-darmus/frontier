@@ -27,6 +27,7 @@ class _InputDataPage extends State<InputDataPage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      backgroundColor:const Color.fromARGB(255, 250, 222, 206),
       appBar:AppBar(
         title:const Text('記録'),
       ),
@@ -68,16 +69,16 @@ class _InputDataPage extends State<InputDataPage>{
               Expanded(child:
                 Column(
                   children:[
-                    TextButton(child:const Text('7',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('7',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red,side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='7';});
                     }),
-                    TextButton(child:const Text('4',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('4',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red,side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='4';});
                     }),
-                    TextButton(child:const Text('1',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('1',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red,side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='1';});
                     }),
-                    TextButton(child:const Text('C',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('C',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Color.fromARGB(207, 244, 67, 54),side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr='';});
                     }),
                   ]
@@ -86,16 +87,16 @@ class _InputDataPage extends State<InputDataPage>{
               Expanded(child:
                 Column(
                   children:[
-                    TextButton(child:const Text('8',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('8',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red,side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='8';});
                     }),
-                    TextButton(child:const Text('5',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('5',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red,side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='5';});
                     }),
-                    TextButton(child:const Text('2',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('2',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red,side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='2';});
                     }),
-                    TextButton(child:const Text('0',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('0',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red,side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='0';});
                     }),
                   ]
@@ -104,16 +105,16 @@ class _InputDataPage extends State<InputDataPage>{
               Expanded(child:
                 Column(
                   children:[
-                    TextButton(child:const Text('9',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('9',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red,side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='9';});
                     }),
-                    TextButton(child:const Text('6',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('6',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red,side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='6';});
                     }),
-                    TextButton(child:const Text('3',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('3',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red,side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='3';});
                     }),
-                    TextButton(child:const Text('B',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('B',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Color.fromARGB(207, 244, 67, 54),side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr=Utilities.backSpace(gameResStr);});
                     }),
                   ]
@@ -122,17 +123,17 @@ class _InputDataPage extends State<InputDataPage>{
               Expanded(child:
                 Column(
                   children:[
-                    TextButton(child:const Text('-',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('-',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,60),backgroundColor:Color.fromARGB(207, 244, 67, 54),side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       setState((){gameResStr+='-';});
                     }),
-                    TextButton(child:const Text('Back\ngame\n↵',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,90),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('Back\ngame\n↵',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,90),backgroundColor:Color.fromARGB(207, 244, 67, 54),side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       // 入力チェック問題なし
                       setState((){
                         gameResStr = gameResStrList[gameResStrList.length-1];
                         gameResStrList.removeLast();
                       });
                     }),
-                    TextButton(child:const Text('Next\ngame\n↵',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,90),backgroundColor:Colors.red),onPressed:(){
+                    TextButton(child:const Text('Next\ngame\n↵',style:TextStyle(color:Colors.white)),style:TextButton.styleFrom(minimumSize: const Size(90,90),backgroundColor:Color.fromARGB(207, 244, 67, 54),side:const BorderSide(color:Color.fromARGB(255, 190, 43, 32),width:3)),onPressed:(){
                       bool inputCheck1 = gameResStr.isNotEmpty;
                       if(!inputCheck1){
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('エラー!!!')));
